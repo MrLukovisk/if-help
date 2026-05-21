@@ -1,6 +1,6 @@
 Projeto Final Interdisciplinar - Lucas Brand
 
-Uma breve descrição do que o seu site faz (ex: "Plataforma de Perguntas e Respostas inspirada no StackOverflow").
+Esse projeto foi realizado com o intuito de facilitar a comunicação organizacional utilizando um site de perguntas e respostas, tendo como foco a ajuda escolar daqueles na instituição.
 
 ===
 
