@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Registrar</title>
+<style>
+  .alert {
+    padding: 20px;
+    margin: 5px;
+    color: #970020;
+    background-color: #ffd5de;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% for alerta in get_flashed_messages() %}
+  <div class="alert">{{ alerta }}</div>
+{% endfor %}
+
+<div class="container"
+  style="width: fit-content; height: auto; padding-left: 60px; padding-right: 60px; padding-top: 30px; padding-bottom: 30px; margin-top: 12vh; overflow: auto; border: 1px solid black; border-radius: 20px;">
+  <form method="post" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1>Cadastro</h1>
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome:</label>
+      <input type="text" class="form-control" name="nome" id="nome", maxlength="80" style="width: 300px;">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp", maxlength="80" style="width: 300px;">
+    </div>
+    <div class="mb-3">
+      <label for="senha" class="form-label">Senha:</label>
+      <input type="password" class="form-control" name="senha" id="senha" style="width: 300px;">
+    </div>
+    <p>Já tem uma conta? <a href="/login">Login</a></p>
+    <button type="submit" class="btn btn-primary" style="width: 100px; margin-top: 10px;">Registrar</button>
+
+  </form>
+</div>
+
+
+{% endblock %}

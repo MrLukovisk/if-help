@@ -1,0 +1,77 @@
+<!-- djlint:on -->
+{% extends 'base.html' %}
+
+{% block head %}<title>Postagem</title>{% endblock %}
+
+{% block body %}
+
+  
+  <div class="pergunta">
+    <a href="{{ url_for('show_user', user_id=post.usuario.id) }}"><h5>{{ post.usuario.nome }}</h5></a>
+    <h4>
+      <b>{{ post.titulo }}</b>
+    </h4>
+    <p>{{ post.conteudo }}</p>
+    {% if logado %}
+      {% if usuario.tipo == 'A' or usuario.id == post.usuario_id %}
+        <a href="{{ url_for('deletar_postagem', post_id=post.id) }}" class="btn btn-danger">Excluir</a>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% if logado %}
+
+    <div class="responder">
+      <form method="post">
+        <textarea class="from-control" maxlength="1500" rows="5" name="conteudo" id="conteudo" placeholder="Responda a pergunta aqui."></textarea>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+
+  {% endif %}
+
+  {% for resposta in respostas %}
+
+    <div class="respostas">
+      <p>
+        <a href="{{ url_for('show_user', user_id=post.usuario.id) }}">{{ resposta.usuario.nome }}</a> | Votos: {{ resposta.qtd_votos }}
+        {% if logado %}
+          {% set voto_existente = {'valor': None} %}
+          {% for voto in resposta.votos %}
+            {% if voto.usuario_id == usuario.id %}
+              {% if voto_existente.update({'valor': voto.tipo_voto}) %} {% endif %}
+            {% endif %}
+          {% endfor %}
+
+          
+          <a href="{{ url_for('votar', resposta_id=resposta.id, tipo_voto='P') }}"> {% if voto_existente.valor == "P" %} <img src="../static/img/like_fill.png"></a> {% else %} <img src="../static/img/like_outline.png"></a> {% endif %}
+          <a href="{{ url_for('votar', resposta_id=resposta.id, tipo_voto='N') }}"> {% if voto_existente.valor == "N" %} <img src="../static/img/dislike_fill.png"></a> {% else %} <img src="../static/img/dislike_outline.png"></a> {% endif %}
+          
+          {% if usuario.id == resposta.usuario_id or usuario.tipo == 'A' %}
+            <span style="float: right;">
+            <a href="{{ url_for('deletar_resposta', resposta_id=resposta.id) }}" class="btn btn-danger">Excluir</a>
+            </span>
+          {% endif %}
+
+        {% endif %}
+      </p>
+      <p>{{ resposta.conteudo }}</p>
+    </div>
+
+  {% endfor %}
+
+  <!-- Controle de paginação -->
+<div class="paginacao">
+  {% if pagina > 1 %}
+    <a href="{{ url_for('home', pagina=pagina-1) }}">Página Anterior </a>
+  {% endif %}
+    
+  <span>Página {{ pagina }} de {{ total_paginas }}</span>
+    
+  {% if pagina < total_paginas %}
+    <a href="{{ url_for('home', pagina=pagina+1) }}"> Próxima Página</a>
+  {% endif %}
+</div>
+
+
+{% endblock %}

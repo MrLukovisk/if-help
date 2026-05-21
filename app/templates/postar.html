@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+ <title>Criar Postagem</title>
+    <style>
+        *:focus{box-shadow: none !important;}
+    </style>
+{% endblock %}
+
+{% block body %}
+
+    <div class="d-flex flex-column mb-3" style="padding-top: 10%;">
+        <form method="post" style="display: flex; flex-direction: column;">
+            <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Digite sua pergunta aqui", maxlength="150" style="width: 100%; border-radius: 0;" required>
+            <textarea class="from-control" maxlength="1500" rows="10" name="conteudo" id="conteudo" placeholder="  Descreva sua pergunta aqui"></textarea>
+            <button type="submit" class="btn btn-primary" style="width: 100px; margin-top: 5px; align-self: flex-end;">Enviar</button>
+        </form>
+    </div>
+
+{% endblock %}

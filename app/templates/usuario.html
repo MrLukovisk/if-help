@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+ <title>Posts de {{ usuario.nome }}</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="profile">
+ <h1>{{ usuario.nome }} <span style="font-size: medium">{{ usuario.pontos }} pontos.</span></h1>
+ <br>
+</div>
+
+<div class="posts">
+    <h2>Perguntas de {{ usuario.nome }}</h2>
+    {% for pergunta in posts %}
+    <div class="d-flex flex-column mb-3">
+    <a href="{{ url_for('show_post', post_id=pergunta.id) }}">
+    <h3>{{ pergunta.titulo|truncate(50, True) }}  <span style="font-size: medium;">({{ pergunta.respostas|length }} respostas)</span></h3>
+    <p>{{ pergunta.conteudo|truncate(100, True) }}</p>
+    </a>
+    {% if logado %}
+      {% if usuario.id == pergunta.usuario_id %}
+        <span style="float: right;">
+          <a href="{{ url_for('deletar_postagem', post_id=pergunta.id) }}" class="btn btn-danger">Excluir</a>
+        </span>
+      {% endif %}
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Controle de paginação -->
+<div class="paginacao">
+    {% if pagina > 1 %}
+        <a href="{{ url_for('show_user', pagina=pagina-1) }}">Página Anterior </a>
+    {% endif %}
+    
+    <span>Página {{ pagina }} de {{ total_paginas }}</span>
+    
+    {% if pagina < total_paginas %}
+        <a href="{{ url_for('show_user', pagina=pagina+1) }}"> Próxima Página</a>
+    {% endif %}
+</div>
+
+{% endblock %}

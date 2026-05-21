@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+ <title>Inicio</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="posts">
+  {% for pergunta in posts %}
+    <div class="d-flex flex-column mb-3">
+    <a class="nome_usuario" href="{{ url_for('show_user', user_id=pergunta.usuario.id) }}">{{ pergunta.usuario.nome }}</a>
+    <a href="{{ url_for('show_post', post_id=pergunta.id) }}">
+    <h3>{{ pergunta.titulo|truncate(50, True) }}  <span style="font-size: medium;">({{ pergunta.respostas|length }} respostas)</span></h3>
+    <p>{{ pergunta.conteudo|truncate(100, True) }}</p>
+    </a>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Controle de paginação -->
+<div class="paginacao">
+  {% if pagina > 1 %}
+    <a href="{{ url_for('home', pagina=pagina-1) }}">Página Anterior </a>
+  {% endif %}
+    
+  <span>Página {{ pagina }} de {{ total_paginas }}</span>
+    
+  {% if pagina < total_paginas %}
+    <a href="{{ url_for('home', pagina=pagina+1) }}"> Próxima Página</a>
+  {% endif %}
+</div>
+
+{% endblock %}
