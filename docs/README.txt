@@ -40,7 +40,7 @@ Como Configurar e Rodar:
 
 1. Clonar o repositório
 bash
-git clone [https://github.com/MrLukovisk/if-help.git](https://github.com/MrLukovisk/if-help.git)
+git clone [https://github.com/MrLukovisk/if-help.git]
 
 2. Configurar o Ambiente Virtual
 python -m venv .venv
