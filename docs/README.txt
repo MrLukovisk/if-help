@@ -53,7 +53,7 @@ source .venv/bin/activate
 pip install -r docs/requirements.txt
 
 4. Variáveis de Ambiente
-Crie um arquivo .env dentro da pasta site/ e adicione suas strings sensíveis:
+Crie um arquivo .env dentro da pasta projeto/ e adicione suas strings sensíveis:
 SECRET_KEY=CHAVE_SECRETA
 DATABASE_URL=mysql+pymysql://USUARIO:SENHA@localhost/NOME_DO_BANCO
 
@@ -66,6 +66,3 @@ python main.py
 Referência Técnica (SQL)
 Para fins de consulta ou migração manual, o script original de criação das tabelas (DDL) está disponível em:
 docs/setup.sql
-
----
-
